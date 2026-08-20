@@ -1,0 +1,688 @@
+import os
+
+# Create HTML content for the PokeMMO Gym Leader Farm Guide
+html_content = """<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PokeMMO - Guía de Gimnasio</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --card-border: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-blue: #38bdf8;
+            --accent-green: #4ade80;
+            --accent-yellow: #facc15;
+            --accent-red: #f87171;
+            --accent-purple: #c084fc;
+            
+            /* Pokemon Colors */
+            --aero: #f59e0b;
+            --blast: #3b82f6;
+            --typh: #ef4444;
+            --exca: #a855f7;
+            --toge: #ec4899;
+            --vanil: #06b6d4;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 2px solid var(--card-border);
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: var(--accent-blue);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .legend {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .legend-title {
+            width: 100%;
+            text-align: center;
+            font-weight: bold;
+            color: var(--accent-blue);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .badge-aero { background-color: var(--aero); }
+        .badge-blast { background-color: var(--blast); }
+        .badge-typh { background-color: var(--typh); }
+        .badge-exca { background-color: var(--exca); }
+        .badge-toge { background-color: var(--toge); }
+        .badge-vanil { background-color: var(--vanil); }
+
+        .region-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .region-header {
+            background: linear-gradient(90deg, #1e293b 0%, #334155 100%);
+            padding: 20px 30px;
+            border-bottom: 1px solid var(--card-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .region-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: 1.5px;
+            font-style: italic;
+        }
+
+        .region-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            padding: 25px;
+        }
+
+        @media (min-width: 900px) {
+            .region-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .map-container {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid var(--card-border);
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .map-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        .steps-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .step-item {
+            background-color: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 10px;
+            padding: 15px;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .step-item:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-2px);
+        }
+
+        .step-header {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .step-number {
+            background-color: var(--accent-blue);
+            color: #0f172a;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .step-location {
+            color: #ffffff;
+        }
+
+        .step-time {
+            font-size: 0.85rem;
+            color: var(--accent-yellow);
+            margin-left: auto;
+        }
+
+        .step-details {
+            padding-left: 34px;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .step-details ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            margin-top: 5px;
+        }
+
+        .step-details li {
+            margin-bottom: 4px;
+        }
+
+        .global-note {
+            background-color: #451a03;
+            border: 1px solid #b45309;
+            color: #fde68a;
+            padding: 15px 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .global-note span {
+            color: #4ade80;
+            background-color: #064e3b;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--card-border);
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>PokeMMO - Guía de RUTA DE LÍDERES</h1>
+        <p>Ruta optimizada para farmear gimnasios en todas las regiones</p>
+    </header>
+
+    <div class="legend">
+        <div class="legend-title">Abreviaturas de Pokémon</div>
+        <span class="badge badge-aero">Aero: Aerodactyl</span>
+        <span class="badge badge-blast">Blast: Blastoise</span>
+        <span class="badge badge-typh">Typh: Typhlosion</span>
+        <span class="badge badge-exca">Exca: Excadrill</span>
+        <span class="badge badge-toge">Toge: Togekiss</span>
+        <span class="badge badge-vanil">Vanil: Vanilluxe</span>
+    </div>
+
+    <!-- HOENN -->
+    <div class="region-card">
+        <div class="region-header">
+            <div class="region-title">HOENN</div>
+        </div>
+        <div class="region-content">
+            <div class="map-container">
+                <img src="hoenn.png" alt="Mapa Hoenn">
+            </div>
+            <ul class="steps-list">
+                <li class="step-item">
+                    <div class="step-header">
+                        <span class="step-number">1</span>
+                        <span class="step-location">Lavaridge (Lavaralda)</span>
+                        <span>–</span>
+                        <span class="badge badge-aero">Aero</span> + <span class="badge badge-blast">Blast</span>
+                    </div>
+                </li>
+                <li class="step-item">
+                    <div class="step-header">
+                        <span class="step-number">2</span>
+                        <span class="step-location">Mauville (Malvalona)</span>
+                        <span>–</span>
+                        <span class="badge badge-aero">Aero</span> + <span class="badge badge-typh">Typh</span>
+                    </div>
+                </li>
+                <li class="step-item">
+                    <div class="step-header">
+                        <span class="step-number">3</span>
+                        <span class="step-location">Rustboro (Férrica)</span>
+                        <span>–</span>
+                        <span class="badge badge-aero">Aero</span> + <span class="badge badge-exca">Exca</span>
+                    </div>
+                </li>
+                <li class="step-item">
+                    <div class="step-header">
+                        <span class="step-number">4</span>
+                        <span class="step-location">Dewford (Azuliza)</span>
+                        <span>–</span>
+                        <span class="badge badge-toge">Toge</span> + <span class="badge badge-blast">Blast</span>
+                    </div>
+                </li>
+                <li class="step-item">
+                    <div class="step-header">
+                        <span class="step-number">5</span>
+                        <span class="step-location">Fortree (Arborada)</span>
+                        <span>–</span>
+                        <span class="badge badge-aero">Aero</span> + <span class="badge badge-vanil">Vanil</span>
+                        <span class="step-time">(Quedan 51m tras este gimnasio)</span>
+                    </div>
+                    <div class="step-details">
+                        <ul>
+                            <li>Si Pelipper o Altaria salen de líderes, usa <strong>Viento Hielo (Icy Wind)</strong> con <span class="badge badge-vanil">Vanil</span>.</li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="global-note">
+        ➜ SIEMPRE <span>[CURA]</span> TRAS TERMINAR CADA REGIÓN. NO ME REPETIRÉ
+    </div>
+
+    <!-- KANTO -->
+    <div class="region-card">
+        <div class="region-header">
+            <div class="region-title">KANTO</div>
+        </div>
+        <div class="region-content">
+            <div class="map-container">
+                <img src="kanto.png" alt="Mapa Kanto">
+            </div>
+            <ul class="steps-list">
+                <li class="step-item">
+                    <div class="step-header">
+                        <span class="step-number">6</span>
+                        <span class="step-location">Vermillion (Carmín)</span>
+                        <span>–</span>
+                        <span class="badge badge-aero">Aero</span> + <span class="badge badge-exca">Exca</span>
+                    </div>
+                </li>
+                <li class="step-item">
+                    <div class="step-header">
+                        <span class="step-number">7</span>
+                        <span class="step-location">Cinnabar (Isla Canela)</span>
+                        <span>–</span>
+                        <span class="badge" style="background:#64748b;">Cualquiera</span> + <span class="badge badge-blast">Blast</span>
+                    </div>
+                    <div class="step-details">
+                        <ul>
+                            <li>El clima estará en Sol, cambia <span class="badge" style="background:#64748b;">Cualquiera</span> » <span class="badge badge-vanil">Vanil</span></li>
+                            <li>Si Blissey está en el campo, cambia ambos líderes por <span class="badge badge-aero">Aero</span> + <span class="badge badge-exca">Exca</span></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="step-item">
+                    <div class="step-header">
+                        <span class="step-number">8</span>
+                        <span class="step-location">Pewter (Plateada)</span>
+                        <span>–</span>
+                        <span class="badge badge-aero">Aero</span> + <span class="badge badge-exca">Exca</span>
+                    </div>
+                </li>
+                <li class="step-item">
+                    <div class="step-header">
+                        <span class="step-number">9</span>
+                        <span class="step-location">Saffron (Azafrán)</span>
+                        <span>–</span>
+                        <span class="badge badge-aero">Aero</span> + <span class="badge badge-exca">Exca</span>
+                    </div>
+                    <div class="step-details">
+                        <em>(Y la razón de por qué Furret usa Protección)</em>
+                    </div>
+                </li>
+                <li class="step-item">
+                    <div class="step-header">
+                        <span class="step-number">10</span>
+                        <span class="step-location">Fuchsia (Fucsia)</span>
+                        <span>–</span>
+                        <span class="badge badge-aero">Aero</span> + <span class="badge badge-typh">Typh</span>
+                        <span class="step-time">(39m restantes)</span>
+                    </div>
+                    <div class="step-details">
+                        <ul>
+                            <li><span class="badge badge-exca">Exca</span> usa Avalancha (Rock Slide) cuando le sacan con Tarjeta Roja (Red Card)</li>
+                            <li>O usa Terremoto (Earthquake) si quieres debilitar a tu propio <span class="badge badge-typh">Typh</span> jaja</li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- SINNOH -->
+    <div class="region-card">
+        <div class="region-header">
+            <div class="region-title">SINNOH</div>
+        </div>
+        <div class="region-content">
+            <div class="map-container">
+                <img src="sinnoh.png" alt="Mapa Sinnoh">
+            </div>
+            <ul class="steps-list">
+                <li class="step-item">
+                    <div class="step-header">
+                        <span class="step-number">11</span>
+                        <span class="step-location">Veilstone (Rocaveloz)</span>
+                        <span>–</span>
+                        <span class="badge badge-aero">Aero</span> + <span class="badge badge-typh">Typh</span>
+                    </div>
+                    <div class="step-details">
+                        <ul>
+                            <li>Usa Día Soleado (Sunny Day) con <span class="badge badge-aero">Aero</span></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="step-item">
+                    <div class="step-header">
+                        <span class="step-number">12</span>
+                        <span class="step-location">Eterna (Beta)</span>
+                        <span>–</span>
+                        <span class="badge badge-aero">Aero</span> + <span class="badge badge-typh">Typh</span>
+                    </div>
+                </li>
+                <li class="step-item">
+                    <div class="step-header">
+                        <span class="step-number">13</span>
+                        <span class="step-location">Oreburgh (Pirita)</span>
+                        <span>–</span>
+                        <span class="badge badge-aero">Aero</span> + <span class="badge badge-exca">Exca</span>
+                    </div>
+                    <div class="step-details">
+                        <ul>
+                            <li>Si Excadrill rival está en campo, cambia <span class="badge badge-exca">Exca</span> » <span class="badge badge-vanil">Vanil</span></li>
+                            <li>Si <span class="badge badge-aero">Aero</span> cae, saca a <span class="badge badge-blast">Blast</span></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="step-item">
+                    <div class="step-header">
+                        <span class="step-number">14</span>
+                        <span class="step-location">Sunyshore (Marina)</span>
+                        <span>–</span>
+                        <span class="badge badge-toge">Toge</span> + <span class="badge badge-blast">Blast</span>
+                        <span class="step-time">(31m restantes)</span>
+                    </div>
+                    <div class="step-details">
+                        <ul>
+                            <li>Si Lanturn sale de líder, cambia <span class="badge badge-blast">Blast</span> » <span class="badge badge-vanil">Vanil</span> (deja que caiga) » <span class="badge badge-exca">Exca</span></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- UNOVA / TESELIA -->
+    <div class="region-card">
+        <div class="region-header">
+            <div class="region-title">UNOVA (TESELIA)</div>
+        </div>
+        <div class="region-content">
+            <div class="map-container">
+                <img src="unova.png" alt="Mapa Unova">
+            </div>
+            <ul class="steps-list">
+                <li class="step-item">
+                    <div class="step-header">
+                        <span class="step-number">15</span>
+                        <span class="step-location">Castelia (Porcelana)</span>
+                        <span>–</span>
+                        <span class="badge badge-vanil">Vanil</span> + <span class="badge badge-blast">Blast</span>
+                    </div>
+                </li>
+                <li class="step-item">
+                    <div class="step-header">
+                        <span class="step-number">16</span>
+                        <span class="step-location">Striaton / Gres (Fuego)</span>
+                        <span>–</span>
+                        <span class="badge badge-aero">Aero</span> + <span class="badge badge-blast">Blast</span>
+                    </div>
+                    <div class="step-details">
+                        <ul>
+                            <li>Si hay doble Intimidación de líderes, cambia <span class="badge badge-aero">Aero</span> » <span class="badge badge-exca">Exca</span> » <span class="badge badge-aero">Aero</span></li>
+                            <li>Si Typhlosion está en el campo, usa Danza Lluvia (Rain Dance) con <span class="badge badge-aero">Aero</span></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="step-item">
+                    <div class="step-header">
+                        <span class="step-number">17</span>
+                        <span class="step-location">Striaton / Gres (Planta)</span>
+                        <span>–</span>
+                        <span class="badge badge-toge">Toge</span> + <span class="badge badge-typh">Typh</span>
+                    </div>
+                </li>
+                <li class="step-item">
+                    <div class="step-header">
+                        <span class="step-number">18</span>
+                        <span class="step-location">Striaton / Gres (Agua)</span>
+                        <span>–</span>
+                        <span class="badge badge-toge">Toge</span> + <span class="badge badge-exca">Exca</span>
+                    </div>
+                    <div class="step-details">
+                        <ul>
+                            <li>Si hay <strong>doble</strong> Intimidación de líderes o si hay Lluvia activada, cambia <span class="badge badge-exca">Exca</span> » <span class="badge badge-vanil">Vanil</span> » <span class="badge badge-exca">Exca</span></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="step-item">
+                    <div class="step-header">
+                        <span class="step-number">19</span>
+                        <span class="step-location">Opelucid (Caolín)</span>
+                        <span>–</span>
+                        <span class="badge badge-vanil">Vanil</span> + <span class="badge badge-typh">Typh</span>
+                    </div>
+                    <div class="step-details" style="color: var(--accent-yellow); font-weight: bold; margin-top: 5px;">
+                        ---------------------------------------------> Tras Opelucid, usa pokémon secundarios
+                    </div>
+                </li>
+                <li class="step-item">
+                    <div class="step-header">
+                        <span class="step-number">20</span>
+                        <span class="step-location">Icirrus (Luzana)</span>
+                        <span>–</span>
+                        <span class="badge badge-aero">Aero</span> + <span class="badge badge-typh">Typh</span> <em>(Incineración)</em>
+                    </div>
+                    <div class="step-details">
+                        <ul>
+                            <li>Usa Día Soleado (Sunny Day) con <span class="badge badge-aero">Aero</span></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="step-item">
+                    <div class="step-header">
+                        <span class="step-number">21</span>
+                        <span class="step-location">Mistralton (Loza)</span>
+                        <span>–</span>
+                        <span class="badge badge-aero">Aero</span> + <span class="badge badge-vanil">Vanil</span> <em>(Viento Hielo)</em>
+                    </div>
+                </li>
+                <li class="step-item">
+                    <div class="step-header">
+                        <span class="step-number">22</span>
+                        <span class="step-location">Nimbasa (Mayólica)</span>
+                        <span>–</span>
+                        <span class="badge badge-toge">Toge</span> + <span class="badge badge-typh">Typh</span> <em>(Incineración)</em>
+                        <span class="step-time">(14m restantes)</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- JOHTO -->
+    <div class="region-card">
+        <div class="region-header">
+            <div class="region-title">JOHTO</div>
+        </div>
+        <div class="region-content">
+            <div class="map-container">
+                <img src="johto.png" alt="Mapa Johto">
+            </div>
+            <ul class="steps-list">
+                <li class="step-item">
+                    <div class="step-header">
+                        <span class="step-number">23</span>
+                        <span class="step-location">Goldenrod (Trigal)</span>
+                        <span>–</span>
+                        <span class="badge badge-toge">Toge</span> + <span class="badge badge-typh">Typh</span>
+                    </div>
+                    <div class="step-details">
+                        <ul>
+                            <li>Si ves a Blissey, cambia ambos líderes por <span class="badge badge-aero">Aero</span> + <span class="badge badge-exca">Exca</span></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="step-item">
+                    <div class="step-header">
+                        <span class="step-number">24</span>
+                        <span class="step-location">Azalea (Azalea)</span>
+                        <span>–</span>
+                        <span class="badge badge-aero">Aero</span> + <span class="badge badge-typh">Typh</span>
+                    </div>
+                    <div class="step-details">
+                        <ul>
+                            <li>Si hay Tormenta de Arena (Sand) activada, cambia <span class="badge badge-aero">Aero</span> » <span class="badge badge-vanil">Vanil</span></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="step-item">
+                    <div class="step-header">
+                        <span class="step-number">25</span>
+                        <span class="step-location">Violet (Malva)</span>
+                        <span>–</span>
+                        <span class="badge badge-aero">Aero</span> + <span class="badge badge-vanil">Vanil</span>
+                    </div>
+                    <div class="step-details">
+                        <ul>
+                            <li>Si hay Lluvia activada, usa Viento Hielo (Icy Wind) con <span class="badge badge-vanil">Vanil</span></li>
+                        </ul>
+                    </div>
+                    <div class="step-details" style="color: var(--accent-yellow); font-weight: bold; margin-top: 5px;">
+                        ---------------------------------------------> Tras Violeta, usa pokémon secundarios
+                    </div>
+                </li>
+                <li class="step-item">
+                    <div class="step-header">
+                        <span class="step-number">26</span>
+                        <span class="step-location">Mahogany (Caoba)</span>
+                        <span>–</span>
+                        <span class="badge badge-aero">Aero</span> + <span class="badge badge-typh">Typh</span> <em>(Incineración)</em>
+                    </div>
+                    <div class="step-details">
+                        <ul>
+                            <li>Usa Día Soleado (Sunny Day) con <span class="badge badge-aero">Aero</span></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="step-item">
+                    <div class="step-header">
+                        <span class="step-number">27</span>
+                        <span class="step-location">Cianwood (Orquídea)</span>
+                        <span>–</span>
+                        <span class="badge badge-toge">Toge</span> <em>(Aire Afilado / Air Cutter)</em> + <span class="badge badge-exca">Exca</span>
+                    </div>
+                    <div class="step-details">
+                        <ul>
+                            <li>Contra Granbull (doble Intimidación de líder), cambia <span class="badge badge-exca">Exca</span> » <span class="badge badge-vanil">Vanil</span> » <span class="badge badge-exca">Exca</span></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="step-item">
+                    <div class="step-header">
+                        <span class="step-number">28</span>
+                        <span class="step-location">Olivine (Olivo)</span>
+                        <span>–</span>
+                        <span class="badge badge-toge">Toge</span> + <span class="badge badge-typh">Typh</span> <em>(Incineración)</em>
+                    </div>
+                    <div class="step-details">
+                        <ul>
+                            <li>Si <span class="badge badge-typh">Typh</span> cae, entra <span class="badge badge-exca">Exca</span></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>Guía de Farmeo de Gimnasios PokeMMO • Traducida y adaptada para tu sitio web de GitHub Pages</p>
+    </footer>
+</div>
+
+</body>
+</html>
+"""
+
+with open("index.html", "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+print("index.html creado correctamente.")
