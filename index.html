@@ -1,7 +1,4 @@
-import os
-
-# Create HTML content for the PokeMMO Gym Leader Farm Guide
-html_content = """<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -93,13 +90,22 @@ html_content = """<!DOCTYPE html>
         }
 
         .badge {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
             padding: 4px 12px;
             border-radius: 20px;
             font-weight: bold;
             font-size: 0.85rem;
             color: #ffffff;
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .poke-gif {
+            width: 28px;
+            height: 28px;
+            object-fit: contain;
+            vertical-align: middle;
         }
 
         .badge-aero { background-color: var(--aero); }
@@ -150,6 +156,7 @@ html_content = """<!DOCTYPE html>
 
         .map-container {
             width: 100%;
+            max-height: 500px;
             border-radius: 12px;
             overflow: hidden;
             border: 2px solid var(--card-border);
@@ -161,7 +168,8 @@ html_content = """<!DOCTYPE html>
 
         .map-container img {
             width: 100%;
-            height: auto;
+            height: 100%;
+            max-height: 500px;
             display: block;
             object-fit: contain;
         }
@@ -275,12 +283,12 @@ html_content = """<!DOCTYPE html>
 
     <div class="legend">
         <div class="legend-title">Abreviaturas de Pokémon</div>
-        <span class="badge badge-aero">Aero: Aerodactyl</span>
-        <span class="badge badge-blast">Blast: Blastoise</span>
-        <span class="badge badge-typh">Typh: Typhlosion</span>
-        <span class="badge badge-exca">Exca: Excadrill</span>
-        <span class="badge badge-toge">Toge: Togekiss</span>
-        <span class="badge badge-vanil">Vanil: Vanilluxe</span>
+        <span class="badge badge-aero"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/142.gif" class="poke-gif" alt="Aerodactyl"> Aero: Aerodactyl</span>
+        <span class="badge badge-blast"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/9.gif" class="poke-gif" alt="Blastoise"> Blast: Blastoise</span>
+        <span class="badge badge-typh"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/157.gif" class="poke-gif" alt="Typhlosion"> Typh: Typhlosion</span>
+        <span class="badge badge-exca"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/530.gif" class="poke-gif" alt="Excadrill"> Exca: Excadrill</span>
+        <span class="badge badge-toge"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/468.gif" class="poke-gif" alt="Togekiss"> Toge: Togekiss</span>
+        <span class="badge badge-vanil"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/584.gif" class="poke-gif" alt="Vanilluxe"> Vanil: Vanilluxe</span>
     </div>
 
     <!-- HOENN -->
@@ -298,7 +306,7 @@ html_content = """<!DOCTYPE html>
                         <span class="step-number">1</span>
                         <span class="step-location">Lavaridge (Lavaralda)</span>
                         <span>–</span>
-                        <span class="badge badge-aero">Aero</span> + <span class="badge badge-blast">Blast</span>
+                        <span class="badge badge-aero"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/142.gif" class="poke-gif" alt="Aero"> Aero</span> + <span class="badge badge-blast"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/9.gif" class="poke-gif" alt="Blast"> Blast</span>
                     </div>
                 </li>
                 <li class="step-item">
@@ -306,7 +314,7 @@ html_content = """<!DOCTYPE html>
                         <span class="step-number">2</span>
                         <span class="step-location">Mauville (Malvalona)</span>
                         <span>–</span>
-                        <span class="badge badge-aero">Aero</span> + <span class="badge badge-typh">Typh</span>
+                        <span class="badge badge-aero"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/142.gif" class="poke-gif" alt="Aero"> Aero</span> + <span class="badge badge-typh"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/157.gif" class="poke-gif" alt="Typh"> Typh</span>
                     </div>
                 </li>
                 <li class="step-item">
@@ -314,7 +322,7 @@ html_content = """<!DOCTYPE html>
                         <span class="step-number">3</span>
                         <span class="step-location">Rustboro (Férrica)</span>
                         <span>–</span>
-                        <span class="badge badge-aero">Aero</span> + <span class="badge badge-exca">Exca</span>
+                        <span class="badge badge-aero"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/142.gif" class="poke-gif" alt="Aero"> Aero</span> + <span class="badge badge-exca"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/530.gif" class="poke-gif" alt="Exca"> Exca</span>
                     </div>
                 </li>
                 <li class="step-item">
@@ -322,7 +330,7 @@ html_content = """<!DOCTYPE html>
                         <span class="step-number">4</span>
                         <span class="step-location">Dewford (Azuliza)</span>
                         <span>–</span>
-                        <span class="badge badge-toge">Toge</span> + <span class="badge badge-blast">Blast</span>
+                        <span class="badge badge-toge"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/468.gif" class="poke-gif" alt="Toge"> Toge</span> + <span class="badge badge-blast"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/9.gif" class="poke-gif" alt="Blast"> Blast</span>
                     </div>
                 </li>
                 <li class="step-item">
@@ -330,12 +338,12 @@ html_content = """<!DOCTYPE html>
                         <span class="step-number">5</span>
                         <span class="step-location">Fortree (Arborada)</span>
                         <span>–</span>
-                        <span class="badge badge-aero">Aero</span> + <span class="badge badge-vanil">Vanil</span>
+                        <span class="badge badge-aero"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/142.gif" class="poke-gif" alt="Aero"> Aero</span> + <span class="badge badge-vanil"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/584.gif" class="poke-gif" alt="Vanil"> Vanil</span>
                         <span class="step-time">(Quedan 51m tras este gimnasio)</span>
                     </div>
                     <div class="step-details">
                         <ul>
-                            <li>Si Pelipper o Altaria salen de líderes, usa <strong>Viento Hielo (Icy Wind)</strong> con <span class="badge badge-vanil">Vanil</span>.</li>
+                            <li>Si Pelipper <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/279.gif" class="poke-gif" alt="Pelipper"> o Altaria <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/334.gif" class="poke-gif" alt="Altaria"> salen de líderes, usa <strong>Viento Hielo (Icy Wind)</strong> con <span class="badge badge-vanil"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/584.gif" class="poke-gif" alt="Vanil"> Vanil</span>.</li>
                         </ul>
                     </div>
                 </li>
@@ -362,7 +370,7 @@ html_content = """<!DOCTYPE html>
                         <span class="step-number">6</span>
                         <span class="step-location">Vermillion (Carmín)</span>
                         <span>–</span>
-                        <span class="badge badge-aero">Aero</span> + <span class="badge badge-exca">Exca</span>
+                        <span class="badge badge-aero"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/142.gif" class="poke-gif" alt="Aero"> Aero</span> + <span class="badge badge-exca"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/530.gif" class="poke-gif" alt="Exca"> Exca</span>
                     </div>
                 </li>
                 <li class="step-item">
@@ -370,12 +378,12 @@ html_content = """<!DOCTYPE html>
                         <span class="step-number">7</span>
                         <span class="step-location">Cinnabar (Isla Canela)</span>
                         <span>–</span>
-                        <span class="badge" style="background:#64748b;">Cualquiera</span> + <span class="badge badge-blast">Blast</span>
+                        <span class="badge" style="background:#64748b;">Cualquiera</span> + <span class="badge badge-blast"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/9.gif" class="poke-gif" alt="Blast"> Blast</span>
                     </div>
                     <div class="step-details">
                         <ul>
-                            <li>El clima estará en Sol, cambia <span class="badge" style="background:#64748b;">Cualquiera</span> » <span class="badge badge-vanil">Vanil</span></li>
-                            <li>Si Blissey está en el campo, cambia ambos líderes por <span class="badge badge-aero">Aero</span> + <span class="badge badge-exca">Exca</span></li>
+                            <li>El clima estará en Sol, cambia <span class="badge" style="background:#64748b;">Cualquiera</span> » <span class="badge badge-vanil"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/584.gif" class="poke-gif" alt="Vanil"> Vanil</span></li>
+                            <li>Si Blissey <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/242.gif" class="poke-gif" alt="Blissey"> está en el campo, cambia ambos líderes por <span class="badge badge-aero"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/142.gif" class="poke-gif" alt="Aero"> Aero</span> + <span class="badge badge-exca"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/530.gif" class="poke-gif" alt="Exca"> Exca</span></li>
                         </ul>
                     </div>
                 </li>
@@ -384,7 +392,7 @@ html_content = """<!DOCTYPE html>
                         <span class="step-number">8</span>
                         <span class="step-location">Pewter (Plateada)</span>
                         <span>–</span>
-                        <span class="badge badge-aero">Aero</span> + <span class="badge badge-exca">Exca</span>
+                        <span class="badge badge-aero"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/142.gif" class="poke-gif" alt="Aero"> Aero</span> + <span class="badge badge-exca"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/530.gif" class="poke-gif" alt="Exca"> Exca</span>
                     </div>
                 </li>
                 <li class="step-item">
@@ -392,10 +400,10 @@ html_content = """<!DOCTYPE html>
                         <span class="step-number">9</span>
                         <span class="step-location">Saffron (Azafrán)</span>
                         <span>–</span>
-                        <span class="badge badge-aero">Aero</span> + <span class="badge badge-exca">Exca</span>
+                        <span class="badge badge-aero"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/142.gif" class="poke-gif" alt="Aero"> Aero</span> + <span class="badge badge-exca"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/530.gif" class="poke-gif" alt="Exca"> Exca</span>
                     </div>
                     <div class="step-details">
-                        <em>(Y la razón de por qué Furret usa Protección)</em>
+                        <em>(Y la razón de por qué Furret <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/162.gif" class="poke-gif" alt="Furret"> usa Protección)</em>
                     </div>
                 </li>
                 <li class="step-item">
@@ -403,13 +411,13 @@ html_content = """<!DOCTYPE html>
                         <span class="step-number">10</span>
                         <span class="step-location">Fuchsia (Fucsia)</span>
                         <span>–</span>
-                        <span class="badge badge-aero">Aero</span> + <span class="badge badge-typh">Typh</span>
+                        <span class="badge badge-aero"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/142.gif" class="poke-gif" alt="Aero"> Aero</span> + <span class="badge badge-typh"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/157.gif" class="poke-gif" alt="Typh"> Typh</span>
                         <span class="step-time">(39m restantes)</span>
                     </div>
                     <div class="step-details">
                         <ul>
-                            <li><span class="badge badge-exca">Exca</span> usa Avalancha (Rock Slide) cuando le sacan con Tarjeta Roja (Red Card)</li>
-                            <li>O usa Terremoto (Earthquake) si quieres debilitar a tu propio <span class="badge badge-typh">Typh</span> jaja</li>
+                            <li><span class="badge badge-exca"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/530.gif" class="poke-gif" alt="Exca"> Exca</span> usa Avalancha (Rock Slide) cuando le sacan con Tarjeta Roja (Red Card)</li>
+                            <li>O usa Terremoto (Earthquake) si quieres debilitar a tu propio <span class="badge badge-typh"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/157.gif" class="poke-gif" alt="Typh"> Typh</span> jaja</li>
                         </ul>
                     </div>
                 </li>
@@ -432,11 +440,11 @@ html_content = """<!DOCTYPE html>
                         <span class="step-number">11</span>
                         <span class="step-location">Veilstone (Rocaveloz)</span>
                         <span>–</span>
-                        <span class="badge badge-aero">Aero</span> + <span class="badge badge-typh">Typh</span>
+                        <span class="badge badge-aero"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/142.gif" class="poke-gif" alt="Aero"> Aero</span> + <span class="badge badge-typh"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/157.gif" class="poke-gif" alt="Typh"> Typh</span>
                     </div>
                     <div class="step-details">
                         <ul>
-                            <li>Usa Día Soleado (Sunny Day) con <span class="badge badge-aero">Aero</span></li>
+                            <li>Usa Día Soleado (Sunny Day) con <span class="badge badge-aero"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/142.gif" class="poke-gif" alt="Aero"> Aero</span></li>
                         </ul>
                     </div>
                 </li>
@@ -445,7 +453,7 @@ html_content = """<!DOCTYPE html>
                         <span class="step-number">12</span>
                         <span class="step-location">Eterna (Beta)</span>
                         <span>–</span>
-                        <span class="badge badge-aero">Aero</span> + <span class="badge badge-typh">Typh</span>
+                        <span class="badge badge-aero"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/142.gif" class="poke-gif" alt="Aero"> Aero</span> + <span class="badge badge-typh"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/157.gif" class="poke-gif" alt="Typh"> Typh</span>
                     </div>
                 </li>
                 <li class="step-item">
@@ -453,12 +461,12 @@ html_content = """<!DOCTYPE html>
                         <span class="step-number">13</span>
                         <span class="step-location">Oreburgh (Pirita)</span>
                         <span>–</span>
-                        <span class="badge badge-aero">Aero</span> + <span class="badge badge-exca">Exca</span>
+                        <span class="badge badge-aero"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/142.gif" class="poke-gif" alt="Aero"> Aero</span> + <span class="badge badge-exca"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/530.gif" class="poke-gif" alt="Exca"> Exca</span>
                     </div>
                     <div class="step-details">
                         <ul>
-                            <li>Si Excadrill rival está en campo, cambia <span class="badge badge-exca">Exca</span> » <span class="badge badge-vanil">Vanil</span></li>
-                            <li>Si <span class="badge badge-aero">Aero</span> cae, saca a <span class="badge badge-blast">Blast</span></li>
+                            <li>Si Excadrill <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/530.gif" class="poke-gif" alt="Excadrill"> rival está en campo, cambia <span class="badge badge-exca"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/530.gif" class="poke-gif" alt="Exca"> Exca</span> » <span class="badge badge-vanil"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/584.gif" class="poke-gif" alt="Vanil"> Vanil</span></li>
+                            <li>Si <span class="badge badge-aero"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/142.gif" class="poke-gif" alt="Aero"> Aero</span> cae, saca a <span class="badge badge-blast"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/9.gif" class="poke-gif" alt="Blast"> Blast</span></li>
                         </ul>
                     </div>
                 </li>
@@ -467,12 +475,12 @@ html_content = """<!DOCTYPE html>
                         <span class="step-number">14</span>
                         <span class="step-location">Sunyshore (Marina)</span>
                         <span>–</span>
-                        <span class="badge badge-toge">Toge</span> + <span class="badge badge-blast">Blast</span>
+                        <span class="badge badge-toge"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/468.gif" class="poke-gif" alt="Toge"> Toge</span> + <span class="badge badge-blast"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/9.gif" class="poke-gif" alt="Blast"> Blast</span>
                         <span class="step-time">(31m restantes)</span>
                     </div>
                     <div class="step-details">
                         <ul>
-                            <li>Si Lanturn sale de líder, cambia <span class="badge badge-blast">Blast</span> » <span class="badge badge-vanil">Vanil</span> (deja que caiga) » <span class="badge badge-exca">Exca</span></li>
+                            <li>Si Lanturn <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/171.gif" class="poke-gif" alt="Lanturn"> sale de líder, cambia <span class="badge badge-blast"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/9.gif" class="poke-gif" alt="Blast"> Blast</span> » <span class="badge badge-vanil"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/584.gif" class="poke-gif" alt="Vanil"> Vanil</span> (deja que caiga) » <span class="badge badge-exca"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/530.gif" class="poke-gif" alt="Exca"> Exca</span></li>
                         </ul>
                     </div>
                 </li>
@@ -495,7 +503,7 @@ html_content = """<!DOCTYPE html>
                         <span class="step-number">15</span>
                         <span class="step-location">Castelia (Porcelana)</span>
                         <span>–</span>
-                        <span class="badge badge-vanil">Vanil</span> + <span class="badge badge-blast">Blast</span>
+                        <span class="badge badge-vanil"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/584.gif" class="poke-gif" alt="Vanil"> Vanil</span> + <span class="badge badge-blast"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/9.gif" class="poke-gif" alt="Blast"> Blast</span>
                     </div>
                 </li>
                 <li class="step-item">
@@ -503,12 +511,12 @@ html_content = """<!DOCTYPE html>
                         <span class="step-number">16</span>
                         <span class="step-location">Striaton / Gres (Fuego)</span>
                         <span>–</span>
-                        <span class="badge badge-aero">Aero</span> + <span class="badge badge-blast">Blast</span>
+                        <span class="badge badge-aero"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/142.gif" class="poke-gif" alt="Aero"> Aero</span> + <span class="badge badge-blast"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/9.gif" class="poke-gif" alt="Blast"> Blast</span>
                     </div>
                     <div class="step-details">
                         <ul>
-                            <li>Si hay doble Intimidación de líderes, cambia <span class="badge badge-aero">Aero</span> » <span class="badge badge-exca">Exca</span> » <span class="badge badge-aero">Aero</span></li>
-                            <li>Si Typhlosion está en el campo, usa Danza Lluvia (Rain Dance) con <span class="badge badge-aero">Aero</span></li>
+                            <li>Si hay doble Intimidación de líderes, cambia <span class="badge badge-aero"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/142.gif" class="poke-gif" alt="Aero"> Aero</span> » <span class="badge badge-exca"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/530.gif" class="poke-gif" alt="Exca"> Exca</span> » <span class="badge badge-aero"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/142.gif" class="poke-gif" alt="Aero"> Aero</span></li>
+                            <li>Si Typhlosion <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/157.gif" class="poke-gif" alt="Typhlosion"> está en el campo, usa Danza Lluvia (Rain Dance) con <span class="badge badge-aero"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/142.gif" class="poke-gif" alt="Aero"> Aero</span></li>
                         </ul>
                     </div>
                 </li>
@@ -517,7 +525,7 @@ html_content = """<!DOCTYPE html>
                         <span class="step-number">17</span>
                         <span class="step-location">Striaton / Gres (Planta)</span>
                         <span>–</span>
-                        <span class="badge badge-toge">Toge</span> + <span class="badge badge-typh">Typh</span>
+                        <span class="badge badge-toge"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/468.gif" class="poke-gif" alt="Toge"> Toge</span> + <span class="badge badge-typh"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/157.gif" class="poke-gif" alt="Typh"> Typh</span>
                     </div>
                 </li>
                 <li class="step-item">
@@ -525,11 +533,11 @@ html_content = """<!DOCTYPE html>
                         <span class="step-number">18</span>
                         <span class="step-location">Striaton / Gres (Agua)</span>
                         <span>–</span>
-                        <span class="badge badge-toge">Toge</span> + <span class="badge badge-exca">Exca</span>
+                        <span class="badge badge-toge"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/468.gif" class="poke-gif" alt="Toge"> Toge</span> + <span class="badge badge-exca"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/530.gif" class="poke-gif" alt="Exca"> Exca</span>
                     </div>
                     <div class="step-details">
                         <ul>
-                            <li>Si hay <strong>doble</strong> Intimidación de líderes o si hay Lluvia activada, cambia <span class="badge badge-exca">Exca</span> » <span class="badge badge-vanil">Vanil</span> » <span class="badge badge-exca">Exca</span></li>
+                            <li>Si hay <strong>doble</strong> Intimidación de líderes o si hay Lluvia activada, cambia <span class="badge badge-exca"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/530.gif" class="poke-gif" alt="Exca"> Exca</span> » <span class="badge badge-vanil"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/584.gif" class="poke-gif" alt="Vanil"> Vanil</span> » <span class="badge badge-exca"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/530.gif" class="poke-gif" alt="Exca"> Exca</span></li>
                         </ul>
                     </div>
                 </li>
@@ -538,7 +546,7 @@ html_content = """<!DOCTYPE html>
                         <span class="step-number">19</span>
                         <span class="step-location">Opelucid (Caolín)</span>
                         <span>–</span>
-                        <span class="badge badge-vanil">Vanil</span> + <span class="badge badge-typh">Typh</span>
+                        <span class="badge badge-vanil"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/584.gif" class="poke-gif" alt="Vanil"> Vanil</span> + <span class="badge badge-typh"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/157.gif" class="poke-gif" alt="Typh"> Typh</span>
                     </div>
                     <div class="step-details" style="color: var(--accent-yellow); font-weight: bold; margin-top: 5px;">
                         ---------------------------------------------> Tras Opelucid, usa pokémon secundarios
@@ -549,11 +557,11 @@ html_content = """<!DOCTYPE html>
                         <span class="step-number">20</span>
                         <span class="step-location">Icirrus (Luzana)</span>
                         <span>–</span>
-                        <span class="badge badge-aero">Aero</span> + <span class="badge badge-typh">Typh</span> <em>(Incineración)</em>
+                        <span class="badge badge-aero"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/142.gif" class="poke-gif" alt="Aero"> Aero</span> + <span class="badge badge-typh"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/157.gif" class="poke-gif" alt="Typh"> Typh</span> <em>(Incineración)</em>
                     </div>
                     <div class="step-details">
                         <ul>
-                            <li>Usa Día Soleado (Sunny Day) con <span class="badge badge-aero">Aero</span></li>
+                            <li>Usa Día Soleado (Sunny Day) con <span class="badge badge-aero"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/142.gif" class="poke-gif" alt="Aero"> Aero</span></li>
                         </ul>
                     </div>
                 </li>
@@ -562,7 +570,7 @@ html_content = """<!DOCTYPE html>
                         <span class="step-number">21</span>
                         <span class="step-location">Mistralton (Loza)</span>
                         <span>–</span>
-                        <span class="badge badge-aero">Aero</span> + <span class="badge badge-vanil">Vanil</span> <em>(Viento Hielo)</em>
+                        <span class="badge badge-aero"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/142.gif" class="poke-gif" alt="Aero"> Aero</span> + <span class="badge badge-vanil"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/584.gif" class="poke-gif" alt="Vanil"> Vanil</span> <em>(Viento Hielo)</em>
                     </div>
                 </li>
                 <li class="step-item">
@@ -570,7 +578,7 @@ html_content = """<!DOCTYPE html>
                         <span class="step-number">22</span>
                         <span class="step-location">Nimbasa (Mayólica)</span>
                         <span>–</span>
-                        <span class="badge badge-toge">Toge</span> + <span class="badge badge-typh">Typh</span> <em>(Incineración)</em>
+                        <span class="badge badge-toge"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/468.gif" class="poke-gif" alt="Toge"> Toge</span> + <span class="badge badge-typh"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/157.gif" class="poke-gif" alt="Typh"> Typh</span> <em>(Incineración)</em>
                         <span class="step-time">(14m restantes)</span>
                     </div>
                 </li>
@@ -593,11 +601,11 @@ html_content = """<!DOCTYPE html>
                         <span class="step-number">23</span>
                         <span class="step-location">Goldenrod (Trigal)</span>
                         <span>–</span>
-                        <span class="badge badge-toge">Toge</span> + <span class="badge badge-typh">Typh</span>
+                        <span class="badge badge-toge"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/468.gif" class="poke-gif" alt="Toge"> Toge</span> + <span class="badge badge-typh"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/157.gif" class="poke-gif" alt="Typh"> Typh</span>
                     </div>
                     <div class="step-details">
                         <ul>
-                            <li>Si ves a Blissey, cambia ambos líderes por <span class="badge badge-aero">Aero</span> + <span class="badge badge-exca">Exca</span></li>
+                            <li>Si ves a Blissey <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/242.gif" class="poke-gif" alt="Blissey">, cambia ambos líderes por <span class="badge badge-aero"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/142.gif" class="poke-gif" alt="Aero"> Aero</span> + <span class="badge badge-exca"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/530.gif" class="poke-gif" alt="Exca"> Exca</span></li>
                         </ul>
                     </div>
                 </li>
@@ -606,11 +614,11 @@ html_content = """<!DOCTYPE html>
                         <span class="step-number">24</span>
                         <span class="step-location">Azalea (Azalea)</span>
                         <span>–</span>
-                        <span class="badge badge-aero">Aero</span> + <span class="badge badge-typh">Typh</span>
+                        <span class="badge badge-aero"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/142.gif" class="poke-gif" alt="Aero"> Aero</span> + <span class="badge badge-typh"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/157.gif" class="poke-gif" alt="Typh"> Typh</span>
                     </div>
                     <div class="step-details">
                         <ul>
-                            <li>Si hay Tormenta de Arena (Sand) activada, cambia <span class="badge badge-aero">Aero</span> » <span class="badge badge-vanil">Vanil</span></li>
+                            <li>Si hay Tormenta de Arena (Sand) activada, cambia <span class="badge badge-aero"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/142.gif" class="poke-gif" alt="Aero"> Aero</span> » <span class="badge badge-vanil"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/584.gif" class="poke-gif" alt="Vanil"> Vanil</span></li>
                         </ul>
                     </div>
                 </li>
@@ -619,11 +627,11 @@ html_content = """<!DOCTYPE html>
                         <span class="step-number">25</span>
                         <span class="step-location">Violet (Malva)</span>
                         <span>–</span>
-                        <span class="badge badge-aero">Aero</span> + <span class="badge badge-vanil">Vanil</span>
+                        <span class="badge badge-aero"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/142.gif" class="poke-gif" alt="Aero"> Aero</span> + <span class="badge badge-vanil"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/584.gif" class="poke-gif" alt="Vanil"> Vanil</span>
                     </div>
                     <div class="step-details">
                         <ul>
-                            <li>Si hay Lluvia activada, usa Viento Hielo (Icy Wind) con <span class="badge badge-vanil">Vanil</span></li>
+                            <li>Si hay Lluvia activada, usa Viento Hielo (Icy Wind) con <span class="badge badge-vanil"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/584.gif" class="poke-gif" alt="Vanil"> Vanil</span></li>
                         </ul>
                     </div>
                     <div class="step-details" style="color: var(--accent-yellow); font-weight: bold; margin-top: 5px;">
@@ -635,11 +643,11 @@ html_content = """<!DOCTYPE html>
                         <span class="step-number">26</span>
                         <span class="step-location">Mahogany (Caoba)</span>
                         <span>–</span>
-                        <span class="badge badge-aero">Aero</span> + <span class="badge badge-typh">Typh</span> <em>(Incineración)</em>
+                        <span class="badge badge-aero"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/142.gif" class="poke-gif" alt="Aero"> Aero</span> + <span class="badge badge-typh"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/157.gif" class="poke-gif" alt="Typh"> Typh</span> <em>(Incineración)</em>
                     </div>
                     <div class="step-details">
                         <ul>
-                            <li>Usa Día Soleado (Sunny Day) con <span class="badge badge-aero">Aero</span></li>
+                            <li>Usa Día Soleado (Sunny Day) con <span class="badge badge-aero"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/142.gif" class="poke-gif" alt="Aero"> Aero</span></li>
                         </ul>
                     </div>
                 </li>
@@ -648,11 +656,11 @@ html_content = """<!DOCTYPE html>
                         <span class="step-number">27</span>
                         <span class="step-location">Cianwood (Orquídea)</span>
                         <span>–</span>
-                        <span class="badge badge-toge">Toge</span> <em>(Aire Afilado / Air Cutter)</em> + <span class="badge badge-exca">Exca</span>
+                        <span class="badge badge-toge"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/468.gif" class="poke-gif" alt="Toge"> Toge</span> <em>(Aire Afilado / Air Cutter)</em> + <span class="badge badge-exca"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/530.gif" class="poke-gif" alt="Exca"> Exca</span>
                     </div>
                     <div class="step-details">
                         <ul>
-                            <li>Contra Granbull (doble Intimidación de líder), cambia <span class="badge badge-exca">Exca</span> » <span class="badge badge-vanil">Vanil</span> » <span class="badge badge-exca">Exca</span></li>
+                            <li>Contra Granbull <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/210.gif" class="poke-gif" alt="Granbull"> (doble Intimidación de líder), cambia <span class="badge badge-exca"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/530.gif" class="poke-gif" alt="Exca"> Exca</span> » <span class="badge badge-vanil"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/584.gif" class="poke-gif" alt="Vanil"> Vanil</span> » <span class="badge badge-exca"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/530.gif" class="poke-gif" alt="Exca"> Exca</span></li>
                         </ul>
                     </div>
                 </li>
@@ -661,11 +669,11 @@ html_content = """<!DOCTYPE html>
                         <span class="step-number">28</span>
                         <span class="step-location">Olivine (Olivo)</span>
                         <span>–</span>
-                        <span class="badge badge-toge">Toge</span> + <span class="badge badge-typh">Typh</span> <em>(Incineración)</em>
+                        <span class="badge badge-toge"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/468.gif" class="poke-gif" alt="Toge"> Toge</span> + <span class="badge badge-typh"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/157.gif" class="poke-gif" alt="Typh"> Typh</span> <em>(Incineración)</em>
                     </div>
                     <div class="step-details">
                         <ul>
-                            <li>Si <span class="badge badge-typh">Typh</span> cae, entra <span class="badge badge-exca">Exca</span></li>
+                            <li>Si <span class="badge badge-typh"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/157.gif" class="poke-gif" alt="Typh"> Typh</span> cae, entra <span class="badge badge-exca"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/530.gif" class="poke-gif" alt="Exca"> Exca</span></li>
                         </ul>
                     </div>
                 </li>
@@ -674,15 +682,9 @@ html_content = """<!DOCTYPE html>
     </div>
 
     <footer>
-        <p>Guía de Farmeo de Gimnasios PokeMMO • Traducida y adaptada para tu sitio web de GitHub Pages</p>
+        <p></p>
     </footer>
 </div>
 
 </body>
 </html>
-"""
-
-with open("index.html", "w", encoding="utf-8") as f:
-    f.write(html_content)
-
-print("index.html creado correctamente.")
